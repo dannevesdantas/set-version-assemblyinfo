@@ -1,0 +1,21 @@
+name: 'set-version-assemblyinfo'
+description: 'Set the version in all the AssemblyInfo.cs or AssemblyInfo.vb files in any subdirectory.'
+author: 'dannevesdantas'
+branding:
+  color: purple
+  icon: edit-3
+inputs:
+  path:
+    description: 'Folder location to search for AssemblyInfo.cs/.vb files'
+    required: false
+    default: '${{ github.workspace }}'
+  version:
+    description: 'Version number to set on [AssemblyVersion] and [AssemblyFileVersion] attributes of AssemblyInfo.cs/.vb files'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - run: '${{ github.action_path }}/SetVersion.ps1 ${{ inputs.version }}'
+      shell: powershell
+      
